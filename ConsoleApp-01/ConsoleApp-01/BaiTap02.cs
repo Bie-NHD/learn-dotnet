@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -74,8 +75,57 @@ namespace ConsoleApp_01
                 message = "Binh thuong";
             else message = "Gay";
 
-            Console.WriteLine("Can nang: {0:1f}\nChieu cao: {1:1f}\nBMI: {2:1f} - {3}",w,h,bmi,message);
+            Console.WriteLine("Can nang: {0:1f}\nChieu cao: {1:1f}\nBMI: {2:1f} - {3}", w, h, bmi, message);
 
         }
+        //15. Hãy viết chương trình đọc vào một số nguyên.
+        //a.Tính và in ra cho biết số nguyên đó có bao nhiêu chữ số.
+        //Ví dụ:
+        //Hay nhap 1 so nguyen: 1462
+        //So nay co: 4 chu so
+        //b.Tính và in ra tổng các chữ số của số nguyên này.
+        //Ví dụ:
+        //Hay nhap 1 so nguyen: 2872
+        //Tong cac chu so cua 1852 la: 2+8+7+2 = 19
+        //c.Tính và in ra số nguyên có các chữ số có thứ tự ngược với các chữ số của số
+        //ban đầu.
+        //d.Một số nguyên dương gọi là đối xứng nếu đọc từ trái qua hay từ phải lại đều
+        //giống nhau.Ví dụ các số sau đây là đối xứng: 12321, 9999, 55355,… Hãy
+        //viết chương trình đọc vào một số nguyên dương và in ra thông báo cho biết số
+        //này có đối xứng không. (đối xứng nếu số đó và số đảo ngược của nó bằng
+        //nhau)
+        public static void bai15()
+        {
+            string num;
+            while (true)
+                Console.WriteLine("Nhap so: ");
+            num = Console.ReadLine();
+
+
+            Console.WriteLine("{0} co {1:i} chu so. ", num, num.Length);
+            Console.WriteLine("Dao nguoc chuoi so: "+ reverseNumString(num));
+
+
+
+
+        }
+        private static string reverseNumString(string str)
+        {
+            str.Trim();
+            bool check = str[str.Length - 1] == '0';
+            str.Reverse();
+            if (check) { str = str.Substring(1, str.Length); }
+            return str;
+        }
+        //private static int sumOfNumString(string str)
+        //{
+        //    int sum = 0;
+        //    foreach (string item in str)
+        //    {
+        //        sum += int.Parse(item);
+        //    }
+        //    return sum;
+        //}
     }
 }
+
