@@ -8,8 +8,8 @@ namespace ConsoleApp_01
 {
     internal class BaiTap01
     {
-    //        1. In ra chữ số hàng trăm, hàng chục, hàng đơn vị của một số có ba chữ số.Ví dụ khi
-    //  nhập số 365 thì in ra: Chữ số hàng trăm: 3, hàng chục: 6, hàng đơn vị: 5
+        //        1. In ra chữ số hàng trăm, hàng chục, hàng đơn vị của một số có ba chữ số.Ví dụ khi
+        //  nhập số 365 thì in ra: Chữ số hàng trăm: 3, hàng chục: 6, hàng đơn vị: 5
 
 
         //        2. Nhập bán kính đường tròn r.Tính và xuất chu vi, diện tích đường tròn tương ứng
@@ -137,5 +137,28 @@ namespace ConsoleApp_01
         //Tiêu thụ: < chỉ số mới - chỉ số cũ >
         //Tiền điện: < tiêu thụ * 452.45 >
         //Tiết kiệm điện là quốc sách
+        public static void cau9()
+        {
+            string name;
+            int oldValue, newValue, consume;
+
+            Console.WriteLine("Nhap ten khach hang: ");
+            name = Console.ReadLine();
+            Console.WriteLine("Chỉ số cũ: ");
+            oldValue = int.Parse(Console.ReadLine());
+            Console.WriteLine("Chỉ số mới: ");
+            newValue = int.Parse(Console.ReadLine());
+            consume = newValue - oldValue;
+
+
+            Console.WriteLine("Hoá đơn tiền điện");
+            Console.WriteLine("Khách hàng: ");
+            Console.WriteLine("Chỉ số cũ: "+oldValue);
+            Console.WriteLine("Chỉ số mới: "+newValue);
+            Console.WriteLine("Tiêu thụ: "+consume);
+            Console.WriteLine("Tiền điện: "+consume*452.45);
+            Console.WriteLine("Chỉ số mới: ");
+        Console.WriteLine("Tiết kiệm điện là quốc sách");
+        }
     }
 }
