@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp_01
+﻿namespace ConsoleApp_01
 {
     internal class BaiTap02
 
@@ -96,36 +89,84 @@ namespace ConsoleApp_01
         //nhau)
         public static void bai15()
         {
-            string num;
+
+            int number;
+
+            Console.ReadLine();
             while (true)
+            {
+
                 Console.WriteLine("Nhap so: ");
-            num = Console.ReadLine();
 
 
-            Console.WriteLine("{0} co {1:i} chu so. ", num, num.Length);
-            Console.WriteLine("Dao nguoc chuoi so: "+ reverseNumString(num));
+                if (!Int32.TryParse(Console.ReadLine().Trim(), out number))
+                {
+                    Console.WriteLine("So khong hop le!");
+                    continue;
+                }
+
+                break;
+            }
+
+            string strNum = number.ToString();
+            int strLen = strNum.Length;
+
+            // a
+            Console.WriteLine($"{number} co {strLen} chu so. ");
+            // b
+            int tempResult = number, sum = 0;
+            while (tempResult != 0)
+            {
+                sum += tempResult % 10;
+                tempResult /= 10;
+            }
+            Console.WriteLine("Tong cac chu so: {0}", sum);
+            // c
+            Console.WriteLine("Dao nguoc chuoi so: " + reverseNumString(strNum));
+            // d
+
+            bool checkAssym;
+            int i = strLen / 2;
+
+            switch (strLen % 2)
+            {
+                case 0:
+                    {
+                        checkAssym = strNum[i] == strNum[i + 1];
+                        break;
+                    }
+                default:
+                    {
+                        checkAssym = strNum[i] == strNum[i + 2];
+                        break;
+                    }
+            }
+
+            string message = checkAssym ? "doi xung" : "khong doi xung";
+
+            Console.WriteLine("So da nhap "+message);
+
+
 
 
 
 
         }
         private static string reverseNumString(string str)
+        // tutorial:  https://stackoverflow.com/questions/228038/best-way-to-reverse-a-string/56937817#56937817
         {
-            str.Trim();
+
             bool check = str[str.Length - 1] == '0';
-            str.Reverse();
-            if (check) { str = str.Substring(1, str.Length); }
-            return str;
+            // Reverse str
+            str = string.Create<string>(str.Length, str, (chars, state) =>
+            {
+                state.AsSpan().CopyTo(chars);
+                chars.Reverse();
+            });
+            return (check) ? str.Substring(1, str.Length - 1) : str;
+
         }
-        //private static int sumOfNumString(string str)
-        //{
-        //    int sum = 0;
-        //    foreach (string item in str)
-        //    {
-        //        sum += int.Parse(item);
-        //    }
-        //    return sum;
-        //}
+
     }
 }
 

@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp_01
+﻿namespace ConsoleApp_01
 {
     internal class BaiTap01
     {
         //        1. In ra chữ số hàng trăm, hàng chục, hàng đơn vị của một số có ba chữ số.Ví dụ khi
         //  nhập số 365 thì in ra: Chữ số hàng trăm: 3, hàng chục: 6, hàng đơn vị: 5
+        public static void cau1()
+        {
+            int number;
+            Console.WriteLine("Nhap so co 3 chu so: ");
+            Int32.TryParse(Console.ReadLine(),out number);
+
+            Console.WriteLine($"{number}: hang tram: {number/100}, hang chuc: {number%100/10}, hang don vi {number % 10}");
+        }
 
 
         //        2. Nhập bán kính đường tròn r.Tính và xuất chu vi, diện tích đường tròn tương ứng
@@ -101,7 +103,7 @@ namespace ConsoleApp_01
             DateTime curr = DateTime.Now;
             int birthYear = curr.Year;
             int age;
-            String name = "";
+            string name = "";
 
             Console.WriteLine("Nhap ten: ");
             name = Console.ReadLine();
