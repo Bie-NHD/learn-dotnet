@@ -40,7 +40,7 @@ internal class Program
 
         //}
 
-        BaiTap02.bai15();
+        BaiTap02.cau06();
 
 
 
