@@ -1,4 +1,7 @@
-﻿using System.Net.NetworkInformation;
+﻿using System.Globalization;
+using System.Net.NetworkInformation;
+using System.Security.Cryptography;
+using System.Xml;
 
 namespace ConsoleApp_01
 {
@@ -7,7 +10,7 @@ namespace ConsoleApp_01
     {
         //Cứ 3 thùng thì được thưởng 1 cái nón, số thùng còn dư
         //thì cứ 1 thùng được thưởng 2 cây viết, một thùng giá 350.000 đ
-        public static void cau01()
+        public static void cau1()
         {
             const int DONGIA = 350000;
             Console.WriteLine("Nhap so thung son:");
@@ -23,7 +26,7 @@ namespace ConsoleApp_01
             Console.WriteLine("So non duoc tang: {0}", iSoNonDuocTang);
             Console.Out.WriteLine("So viet duoc tang: {0}", iSoVietDuocTang);
         }
-        public static void cau02()
+        public static void cau2()
         {
             string strTenHang;
             Console.Write("Nhap ten hang: ");
@@ -51,7 +54,7 @@ namespace ConsoleApp_01
 
         //Viết chương trình tính chỉ số BMI của một người khi biết chiều cao và cân nặng.
         //Biết rằng: BMI = Weight / (Height* Height)
-        public static void cau03()
+        public static void cau3()
         {
             float w, h, bmi; // weight. height
             string message;
@@ -73,17 +76,83 @@ namespace ConsoleApp_01
             Console.WriteLine("Can nang: {0:1f}\nChieu cao: {1:1f}\nBMI: {2:1f} - {3}", w, h, bmi, message);
 
         }
+        //        4. Tính chỉ số WHI(chỉ số vòng hông) một người dựa vào công thức:
+        //WHI= Math.Round((Waist / Hip) * 100) / 100
+
+        //Trong đó:
+        //▪ Waist: kích thước eo;
+        //▪ Hip: kích thước hông;
+        //▪ Round: Là hàm làm tròn lấy từ lớp Math(thư viện chứa các hàm toán học cơ
+        //bản).
+        //Cho biết khả năng mắc bệnh tiểu đường của người này:
+
+        //WHI Khả năng mắc bệnh
+        //Nhỏ hơn 0.9 Nguy cơ tiểu đường thấp
+        //Từ 0.9 trở lên Khả năng tiểu đường lớn hơn 50%
+        public static void cau4()
+        {
+            float waist, hip;
+
+            while (true)
+            {
+                Console.WriteLine("Nhap kich thuoc eo: ");
+                if (!float.TryParse(Console.ReadLine(), out waist) || waist <= 0)
+                {
+                    Console.WriteLine("Nhap sai cu phap!\nHay nhap lai.");
+                    continue;
+                }
+                break;
+            }
+            while (true)
+            {
+                Console.WriteLine("Nhap kich thuoc hong: ");
+                if (!float.TryParse(Console.ReadLine(), out hip) || hip <= 0)
+                {
+                    Console.WriteLine("Nhap sai cu phap!\nHay nhap lai.");
+                    continue;
+                }
+                break;
+            }
+
+            double _WHI = Math.Round((waist / hip) * 100 / 100);
+            string message = (_WHI < 0.9) ? "thap" : "lon hon 50%";
+            Console.WriteLine($"\nWHI: {_WHI}\nNguy co tieu duong {message}");
+        }
         //        5. Nhập vào số giây t bất kỳ >=0. Tính và xuất ra dạng Giờ:Phút:Giây
         //Ví dụ: 
         //Nhập 3750 thì xuất ra 1:2:30 AM
         //Nhập 51100 thì xuất ra 2:11:40 PM
         //Hướng Dẫn: hour=(t/3600)%24; minute=(t%3600)/60; second=(t%3600)%60
-        public static void cau05()
+        public static void cau5()
         {
+            int t = 0;
+            while (true)
+            {
 
+                Console.WriteLine("Nhap t: ");
+                if (int.TryParse(Console.ReadLine(), out t))
+                {
+                    Console.WriteLine("Nhap sai cu phap!\nHay nhap lai.");
+                    continue;
+                }
+                break;
+            }
+
+            int hour = (t / 3600) % 2;
+            int minute = t % 3600 / 60;
+            int second = t % 3600 % 60;
+            string timeOfDay;
+
+            switch (hour / 12 % 2)
+            {
+                case 0: timeOfDay = "AM"; break;
+                default: timeOfDay = "PM"; break;
+            }
+
+            Console.WriteLine($"{t}: {hour}:{minute}:{second}:{timeOfDay}");
         }
         //6. Nhập vào tháng t(với 1<=t<=12). Cho biết t thuộc quý mấy trong năm.
-        public static void cau06()
+        public static void cau6()
         {
             int t;
 
@@ -91,7 +160,7 @@ namespace ConsoleApp_01
             {
                 Console.WriteLine("Nhap thang t: ");
 
-                if (!(Int32.TryParse(Console.ReadLine(), out t) && t >= 1 && t <= 12))
+                if (!(Int32.TryParse(Console.ReadLine(), out t) && (t < 1 || t > 12)))
                 {
                     Console.WriteLine("Nhap sai cu phap!\nHay nhap lai.");
                     continue;
@@ -102,48 +171,84 @@ namespace ConsoleApp_01
             switch (t % 3)
             {
                 case 0: q = t / 3; break;
-                default: q = t/3+1; break;
+                default: q = t / 3 + 1; break;
             }
             Console.WriteLine($"Thang {t} thuoc Q{q}");
         }
         //7. Nhập vào một năm và cho biết năm đó có phải là năm nhuận hay không? (Năm
         //nhuận là năm chia hết cho 4 mà không chia hết cho 100, hoặc chia hết cho 400).
+        public static void cau7()
+        {
+            int y; // year
+
+            while (true)
+            {
+                Console.WriteLine("Nhap nam: ");
+
+                if (!Int32.TryParse(Console.ReadLine(), out y) || y < 0 || y > DateTime.Now.Year)
+                {
+                    Console.WriteLine("Nhap sai cu phap!\nHay nhap lai.");
+                    continue;
+                }
+                break;
+            }
+
+            bool isLeapYear = ((y % 4 == 0) && (y % 100 != 0)) || y % 400 == 0;
+            Console.WriteLine($"Nam {y} la nam " + (isLeapYear ? "nhuan" : "khong nhuan"));
+        }
         //8. Nhập vào tháng t(với 1<=t<=12). Cho biết tháng t có bao nhiêu ngày.Riêng tháng
         //2 thì phải kiểm tra năm nhuận (Năm nhuận là năm chia hết cho 4 mà không chia hết
         //cho 100, hoặc chia hết cho 400).
-        //        9. Nhập vào một ngày(ngày, tháng, năm). Tìm ngày kế sau ngày vừa nhập
-        //(ngày/tháng/năm).
-        public static void cau09()
+        public static void cau8()
         {
-            //int day, month, year;
-            //Console.WriteLine("Nhap ngay theo cu phap dd/mm/yyyy: ");
-            //string[] date;
+
+        }
+        //9. Nhập vào một ngày(ngày, tháng, năm). Tìm ngày kế sau ngày vừa nhập
+        //(ngày/tháng/năm).
+        public static void cau9()
+        {
+            //DateTime userDateTime;
+            //Console.WriteLine("Nhap ngay theo cu phap dd/MM/yyyy: ");
+
+
+
             //while (true)
             //{
-            //    date = Console.ReadLine().Split("/");
-            //    bool checker = Int32.TryParse(date[0], out day) && Int32.TryParse(date[1], out month) && Int32.TryParse(date[2], out year);
-            //    if (checker)
+            //    string strDateTime = Console.ReadLine();
+            //    try { userDateTime = DateTime.ParseExact(strDateTime, "dd/MM/yyyy", null); }
+            //    catch (ArgumentException)
+            //    // https://learn.microsoft.com/en-us/dotnet/api/system.globalization.datetimeformatinfo?view=net-6.0
             //    {
+            //        Console.WriteLine(strDateTime);
             //        Console.WriteLine("Nhap sai cu phap!\nXin hay nhap lai: ");
             //        continue;
             //    }
+
+
+
             //    break;
             //}
 
-            //string input = date.Join("/",out input)
+            //DateTime nextDate = userDateTime.AddDays(1);
+            ////nextDate.AddDays(1);
 
-            //Console.WriteLine($"Ngay tiep theo cua ngay {date.Join("/")}");
+
+            //Console.WriteLine($"Ngay tiep theo cua ngay {userDateTime} la ngay {nextDate}");
+
+            Console.WriteLine("Work in progess --- ");
         }
         //10. Nhập vào một ngày(ngày, tháng, năm). Tìm ngày kế trước ngày vừa nhập
         //(ngày/tháng/năm).
         public static void cau10()
         {
+            Console.WriteLine("Work in progess --- ");
 
         }
         //11. Nhập vào một ngày(ngày, tháng, năm). Cho biết ngày đó là ngày thứ bao nhiêu
         //trong tuần.
         public static void cau11()
         {
+            Console.WriteLine("Work in progess --- ");
 
         }
         //12. Nhập vào số k
@@ -220,6 +325,7 @@ namespace ConsoleApp_01
         //nhập 1 toán hạng.
         public static void cau14()
         {
+            Console.WriteLine("Work in progess --- ");
 
         }
         //15. Hãy viết chương trình đọc vào một số nguyên.
