@@ -8,9 +8,18 @@ internal class Program
 {
     public static void Main()
     {
-        int h = 55;
+        int h = 4;
 
-        //Console.WriteLine("{1} is {0} a prime number ", isPrime(h) ? null : "not",h);
+        // [row,col]
+        var arr = new char[h*2-1, h ];
+        for (int col = 0; col < h ; col++)
+        {
+            for (int row = 0; row < h*2-1; row++)
+            {
+                
+
+            }
+        }
 
     } 
     

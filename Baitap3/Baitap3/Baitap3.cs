@@ -8,6 +8,16 @@ namespace Baitap3
 {
     internal class Baitap3
     {
+        private static void cau06()
+        {
+            int count = 0;
+            string _input;
+
+            Console.WriteLine("Nhap so: ");
+            _input = Console.ReadLine();
+
+            
+        }
         private static bool isPrime(int h)
         {
             for (int i = 2; i < Math.Sqrt(h); i++)

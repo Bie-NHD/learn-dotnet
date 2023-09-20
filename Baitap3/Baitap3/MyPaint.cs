@@ -79,7 +79,7 @@ namespace Baitap3
                 }
             }
 
-            paint(arr,h,h);
+            paint(arr, h, h);
 
 
         }
@@ -95,7 +95,7 @@ namespace Baitap3
                     else arr[row, col] = ' ';
                 }
             }
-            paint(arr,h,h);
+            paint(arr, h, h);
         }
         private static void paintDecreasingRightTriangle(int h)
         {
@@ -111,19 +111,30 @@ namespace Baitap3
             }
             paint(arr, h, h);
         }
-        private static void paintEquillateralTriangle(int h)
+        private static void paintEquillateralTriangle(int h, bool isFilled = true)
         {
-            var arr = new char[2 * h, h];
-            for (int row = 0; row < h; row++)
+            // [row,col]
+            var arr = new char[h, h * 2 - 1];
+            for (int col = 0; col < h * 2 - 1; col++)
             {
-                for (int col = 0; col < 2 * h; col++)
+                for (int row = 0; row < h; row++)
                 {
-                    if (col >= h - 1 - row && col <= (row + h - 1)) arr[col, row] = '*';
-                    else arr[col, row] = ' ';
+                    if (col == h - 1 - row || col == row + h - 1 || row == h - 1)
+                        arr[row, col] = '*';
+
+                    else
+                    if (isFilled && col > h - 1 - row && col < row + h - 1)
+                        arr[row, col] = '*';
+                    else arr[row, col] = ' ';
+
                 }
             }
 
-            paint(arr, h * 2, h);
+            paint(arr, h, h * 2 - 1);
+        }
+        private static void paintParallelogram (int h, bool isFilled = true)
+        {
+
         }
         private static void paint(char[,] arr, int col, int row)
         {
