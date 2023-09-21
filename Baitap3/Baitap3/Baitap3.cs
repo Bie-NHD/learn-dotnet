@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace Baitap3
 {
@@ -28,8 +23,6 @@ namespace Baitap3
             Console.WriteLine("C1: {0:f2}", (n == 0) ? " chu y: n = 0" : C1(n));
             Console.WriteLine("C2: {0:f2}", C2(n));
             Console.WriteLine("C3: {0:f2}", C3(n));
-
-
             while (true)
             {
 
@@ -42,6 +35,14 @@ namespace Baitap3
                 break;
             }
             Console.WriteLine("C4: {0:f2}", C4(x, n));
+            Console.WriteLine("C5: {0:f2}", (n == 0) ? Math.Sqrt(0) : C5(n));
+
+
+
+        }
+        static double C1(int n)
+        {
+            return (n == 0) ? 0 : Enumerable.Range(1, n).Sum(x => 1.0 / x);
         }
         static double C2(int n)
         {
@@ -63,54 +64,145 @@ namespace Baitap3
             return (n == 0) ? 0 : Enumerable.Range(1, n).Sum(i => 1.0 / SumContinousN(i));
         }
 
-        public static double C4(int x, int n)
+        static double C4(int x, int n)
         {
             return (n == 0) ? 0 : Enumerable.Range(1, n).Sum(i => Math.Pow(x, i) / SumContinousN(i));
         }
-        private static void C6()
+        static double C5(int n)
+        {
+            double result = 0;
+
+            for (int i = n; i > 0; i--)
+            {
+                result = Math.Sqrt(i + result);
+            }
+
+            return result;
+        }
+        public static void C6()
         {
             int count = 0;
 
 
             string _input;
 
-            Console.WriteLine("Nhap so: ");
-            _input = Console.ReadLine();
+            while (true)
+            {
+                Console.WriteLine("Nhap so: ");
+                _input = Console.ReadLine().Trim();
+
+                if (!Regex.IsMatch(_input, @"/0-9/gm"))
+                {
+                    Console.WriteLine("So khong hop le.\nXin hay nhap lai.");
+                    continue;
+                }
+                break;
+            }
+
+            foreach (var c in _input)
+            {
+                switch (int.Parse(c.ToString()))
+                {
+                    case 2: { count++; break; }
+                    case 3: { count++; break; }
+                    case 5: { count++; break; }
+                    case 7: { count++; break; }
+                    default: { continue; }
+
+                }
+            }
+            Console.WriteLine("{0} co {1} chu so nguyen to.", _input, count);
+        }
+        public static void C7(int n = 1)
+        {
+            while (true && n == 1)
+            {
+
+                Console.WriteLine("Nhap  n:");
+                if (!int.TryParse(Console.ReadLine(), out n))
+                {
+                    Console.WriteLine("n khong hop le.");
+                    continue;
+                }
+                break;
+            }
+
+            // Initialize sum of prime factors
+            int sum = 0;
+            List<int> listOfDivisors = new List<int>();
+
+            // Note that this loop runs till
+            // square root of n
+            for (int i = 1; i <= (Math.Sqrt(n)); i++)
+            {
+                if (n % i == 0 && isPrime(i))
+                {
+
+                    // If divisors are equal,
+                    // take only one of them
+                    if (n / i == i)
+                    {
+                        sum = sum + i;
+                        listOfDivisors.Add(i);
+                    }
+                    else // Otherwise take both
+                    {
+                        sum = sum + i;
+                        listOfDivisors.Add(i);
+
+                        int temp = n / i;
+                        if (isPrime(temp))
+                        {
+                            sum = sum + temp;
+
+                            listOfDivisors.Add(temp);
+
+                        }
+                    }
+                }
+            }
+
+            string var = sum < n ? "YES" : "NO";
+            Console.WriteLine("Is Deficient: " + var);
+
+            listOfDivisors.Sort();
+            Console.WriteLine("Cac uoc so: ");
+            listOfDivisors.ForEach(x => Console.Write(x + ","));
+            Console.WriteLine();
+            Console.WriteLine("Tong: " + sum);
         }
         public static void C8()
         {
             int width, height;
-            //char[,] arr;
             string[] arr;
 
             height = 4;
             width = 7;
 
 
-            //while (true)
-            //{
+            while (true)
+            {
 
-            //    Console.WriteLine("Nhap chieu dai (width): ");
-            //    if (!Int32.TryParse(Console.ReadLine(), out width) )
-            //    {
-            //        Console.WriteLine("So khong hop le.\nXin hay nhap lai.");
-            //        continue;
-            //    }
-            //    break;
-            //}
-            //while (true)
-            //{
+                Console.WriteLine("Nhap chieu dai (width): ");
+                if (!Int32.TryParse(Console.ReadLine(), out width))
+                {
+                    Console.WriteLine("So khong hop le.\nXin hay nhap lai.");
+                    continue;
+                }
+                break;
+            }
+            while (true)
+            {
 
-            //    Console.WriteLine("Nhap chieu rong (height): ");
-            //    if (!Int32.TryParse(Console.ReadLine(), out height))
-            //    {
-            //        Console.WriteLine("So khong hop le.\nXin hay nhap lai.");
-            //        continue;
-            //    }
-            //    break;
-            //}
+                Console.WriteLine("Nhap chieu rong (height): ");
+                if (!Int32.TryParse(Console.ReadLine(), out height))
+                {
+                    Console.WriteLine("So khong hop le.\nXin hay nhap lai.");
+                    continue;
+                }
+                break;
+            }
 
-            //arr = new char[height, width];
             arr = new string[height];
 
             for (int i = 0; i < height; i++)
@@ -133,6 +225,103 @@ namespace Baitap3
 
             foreach (string s in arr) { Console.WriteLine(s); }
         }
+        public static void C9(int h = 1)
+        {
+
+
+            while (true && h == 1)
+            {
+                Console.WriteLine("Nhap chieu cao h:");
+                if (!int.TryParse(Console.ReadLine(), out h)
+                    )
+                {
+                    Console.WriteLine("Nhap sai cu phap! (h la so nguyen >0).\nHay nhap lai.\n");
+                    continue;
+                }
+                break;
+            }
+
+            Console.WriteLine("Cac hinh ve voi h = " + h);
+            //
+            Console.WriteLine("\nIncreasing Right Triangle.\n");
+            MyPaint.paintIncreasingRightTriangle(h);
+            Console.WriteLine();
+            MyPaint.paintIncreasingRightTriangle(h, false);
+            //
+            Console.WriteLine("\nDecreasing Left Triangle\n");
+            MyPaint.paintDecreasingLeftTriangle(h);
+            Console.WriteLine();
+            MyPaint.paintDecreasingLeftTriangle(h, false);
+            //
+            Console.WriteLine("\nIncreasing Left Triangle.\n");
+            MyPaint.paintIncreasingLeftTriangle(h);
+            Console.WriteLine();
+            MyPaint.paintIncreasingLeftTriangle(h, false);
+            //
+            Console.WriteLine("\nDecreasing Right Triangle.\n");
+            MyPaint.paintDecreasingRightTriangle(h);
+            Console.WriteLine();
+            MyPaint.paintDecreasingRightTriangle(h, false);
+            //
+            Console.WriteLine("\nEquillateral Triangle: ");
+            MyPaint.paintEquillateralTriangle(h);
+            Console.WriteLine();
+            MyPaint.paintEquillateralTriangle(h, false);
+            // 
+            Console.WriteLine("\nParallelogram: \n");
+            MyPaint.paintParallelogram(h);
+            Console.WriteLine();
+            MyPaint.paintParallelogram(h, false);
+            //
+            MyPaint.paintRibbon(h);
+            Console.WriteLine();
+            MyPaint.paintRibbon(h, false);
+        }
+        public static void C10()
+        {
+
+            int count = 0;
+            var rand = new Random();
+            int question = rand.Next(1, 101);
+            int answer;
+
+            while (true && count != 7)
+            {
+
+
+                Console.WriteLine("Hay nhap so cua ban trong khoang [1..100]: ");
+                if (!int.TryParse(Console.ReadLine(), out answer) || answer < 1 || answer > 100)
+                {
+                    Console.WriteLine("Nhap sai cu phap! (h la so nguyen >0).\nHay nhap lai.\n");
+                    continue;
+                }
+
+                if (question == answer)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Haha ban tai that.");
+                    Console.ResetColor();
+                    break;
+                }
+                else
+                {
+                    ++count;
+
+                    Console.WriteLine("So cua ban {0} hon so may!", (answer - question < 0) ? "nho" : "lon");
+
+                    continue;
+                }
+
+            }
+
+            if (count == 7)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Ban da thua!");
+                Console.ResetColor();
+                Console.WriteLine("So cua may la: " + question);
+            }
+        }
         static int Sum(params int[] numbrs)
         {
             return numbrs.Sum(x => x);
@@ -145,10 +334,7 @@ namespace Baitap3
         {
             return n * (n + 1) / 2;
         }
-        static double C1(int n)
-        {
-            return (n == 0) ? 0 : Enumerable.Range(1, n).Sum(x => 1.0 / x);
-        }
+
         private static bool isPrime(int h)
         {
             for (int i = 2; i < Math.Sqrt(h); i++)
