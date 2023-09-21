@@ -8,19 +8,10 @@ internal class Program
 {
     public static void Main()
     {
-        int h = 4;
+        int h = 7;
 
-        // [row,col]
-        var arr = new char[h*2-1, h ];
-        for (int col = 0; col < h ; col++)
-        {
-            for (int row = 0; row < h*2-1; row++)
-            {
-                
+        Baitap3.Baitap3.C8();
 
-            }
-        }
+    }
 
-    } 
-    
 }

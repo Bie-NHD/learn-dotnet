@@ -132,15 +132,45 @@ namespace Baitap3
 
             paint(arr, h, h * 2 - 1);
         }
-        private static void paintParallelogram (int h, bool isFilled = true)
+        public static void paintParallelogram (int h, bool isFilled = true)
         {
-
-        }
-        private static void paint(char[,] arr, int col, int row)
-        {
-            for (int i = 0; i < col; i++)
+            // [row,col]
+            var arr = new char[h * 2 - 1, h];
+            for (int col = 0; col < h; col++)
             {
-                for (int j = 0; j < row; j++)
+                for (int row = 0; row < h * 2 - 1; row++)
+                {
+                    if ((col == 0 && row < h) || (col == h - 1 && row >= h) || row == col || row == col + h -1) arr[row, col] = '*';
+                    else
+                    if (isFilled && (row > col && row < col + h - 1)) arr[row, col] = '*';
+                    else arr[row, col] = ' ';
+
+                }
+            }
+            MyPaint.paint(arr, h * 2 - 1, h);
+        }
+        private static void paintRibbon(int h, bool isFilled = true)
+        {
+            // [row,col]
+            var arr = new char[h * 2 - 1, h * 2 - 1];
+            for (int col = 0; col < h * 2 - 1; col++)
+            {
+                for (int row = 0; row < h * 2 - 1; row++)
+                {
+                    if (row == col || row == h - 1 || (col == 0 && row < h) || (col == h * 2 - 2 && row >= h)) arr[row, col] = '*';
+                    else
+                    if ((col <= row && col < h && row < h) || (col >= h && row >= h && col >= row)) arr[row, col] = '*';
+                    else arr[row, col] = ' ';
+
+                }
+            }
+            MyPaint.paint(arr, h * 2 - 1, h * 2 - 1);
+        }
+        public static void paint(char[,] arr, int row, int col)
+        {
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
                 {
                     Console.Write(arr[i, j]);
                 }
