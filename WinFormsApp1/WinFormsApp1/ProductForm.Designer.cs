@@ -146,19 +146,19 @@
             // 
             ProductName.Tag = "Name";
             ProductName.Text = "Tên SP";
-            ProductName.Width = 300;
+            ProductName.Width = 400;
             // 
             // ProductDesc
             // 
             ProductDesc.Tag = "Desc";
             ProductDesc.Text = "Mô tả";
-            ProductDesc.Width = 300;
+            ProductDesc.Width = 400;
             // 
             // ProductPrice
             // 
             ProductPrice.Tag = "Price";
             ProductPrice.Text = "Đơn giá";
-            ProductPrice.Width = 300;
+            ProductPrice.Width = 400;
             // 
             // groupBox2
             // 

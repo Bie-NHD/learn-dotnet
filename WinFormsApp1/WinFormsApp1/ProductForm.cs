@@ -56,11 +56,11 @@ namespace WinFormsApp1
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            string[] itemData = {txtName.Text,txtDesc.Text,txtPrice.Text};
+            string[] itemData = { txtName.Text, txtDesc.Text, txtPrice.Text };
             lvProductList.Items[lvProductList.SelectedIndices[0]] = new ListViewItem(itemData);
 
-            
-            
+
+
         }
     }
 }
