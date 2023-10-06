@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductForm));
             lblProductName = new Label();
             lblProductDesc = new Label();
             lblProductPrice = new Label();
@@ -40,13 +42,21 @@
             ProductName = new ColumnHeader();
             ProductDesc = new ColumnHeader();
             ProductPrice = new ColumnHeader();
+            imglist = new ImageList(components);
             groupBox2 = new GroupBox();
             button4 = new Button();
             button3 = new Button();
             btnEdit = new Button();
             btnAdd = new Button();
+            menu = new MenuStrip();
+            mnView = new ToolStripMenuItem();
+            mnView_List = new ToolStripMenuItem();
+            mnView_Details = new ToolStripMenuItem();
+            mnView_SmallIcons = new ToolStripMenuItem();
+            formatToolStripMenuItem = new ToolStripMenuItem();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            menu.SuspendLayout();
             SuspendLayout();
             // 
             // lblProductName
@@ -80,7 +90,7 @@
             // 
             lblTitle.Dock = DockStyle.Top;
             lblTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTitle.Location = new Point(0, 0);
+            lblTitle.Location = new Point(0, 42);
             lblTitle.Margin = new Padding(10);
             lblTitle.Name = "lblTitle";
             lblTitle.Padding = new Padding(10);
@@ -121,9 +131,9 @@
             groupBox1.Controls.Add(lblProductPrice);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            groupBox1.Location = new Point(0, 52);
+            groupBox1.Location = new Point(0, 94);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(2082, 973);
+            groupBox1.Size = new Size(2082, 931);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin sản phẩm";
@@ -134,9 +144,11 @@
             lvProductList.CheckBoxes = true;
             lvProductList.Columns.AddRange(new ColumnHeader[] { ProductName, ProductDesc, ProductPrice });
             lvProductList.FullRowSelect = true;
+            lvProductList.LargeImageList = imglist;
             lvProductList.Location = new Point(703, 60);
             lvProductList.Name = "lvProductList";
             lvProductList.Size = new Size(1379, 714);
+            lvProductList.SmallImageList = imglist;
             lvProductList.TabIndex = 8;
             lvProductList.UseCompatibleStateImageBehavior = false;
             lvProductList.View = View.Details;
@@ -160,6 +172,13 @@
             ProductPrice.Text = "Đơn giá";
             ProductPrice.Width = 400;
             // 
+            // imglist
+            // 
+            imglist.ColorDepth = ColorDepth.Depth8Bit;
+            imglist.ImageStream = (ImageListStreamer)resources.GetObject("imglist.ImageStream");
+            imglist.TransparentColor = Color.Transparent;
+            imglist.Images.SetKeyName(0, "u-tried.jpg");
+            // 
             // groupBox2
             // 
             groupBox2.Controls.Add(button4);
@@ -172,6 +191,7 @@
             groupBox2.Size = new Size(2082, 200);
             groupBox2.TabIndex = 9;
             groupBox2.TabStop = false;
+            groupBox2.Enter += groupBox2_Enter;
             // 
             // button4
             // 
@@ -210,7 +230,52 @@
             btnAdd.TabIndex = 0;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += button1_Click;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // menu
+            // 
+            menu.ImageScalingSize = new Size(32, 32);
+            menu.Items.AddRange(new ToolStripItem[] { mnView, formatToolStripMenuItem });
+            menu.Location = new Point(0, 0);
+            menu.Name = "menu";
+            menu.Size = new Size(2082, 42);
+            menu.TabIndex = 10;
+            menu.Text = "menuStrip1";
+            // 
+            // mnView
+            // 
+            mnView.DropDownItems.AddRange(new ToolStripItem[] { mnView_List, mnView_Details, mnView_SmallIcons });
+            mnView.Name = "mnView";
+            mnView.Size = new Size(85, 38);
+            mnView.Text = "View";
+            // 
+            // mnView_List
+            // 
+            mnView_List.Name = "mnView_List";
+            mnView_List.Size = new Size(267, 44);
+            mnView_List.Text = "List";
+            mnView_List.Click += mnView_List_Click;
+            // 
+            // mnView_Details
+            // 
+            mnView_Details.Name = "mnView_Details";
+            mnView_Details.Size = new Size(267, 44);
+            mnView_Details.Text = "Details";
+            mnView_Details.Click += mnView_Details_Click;
+            // 
+            // mnView_SmallIcons
+            // 
+            mnView_SmallIcons.Name = "mnView_SmallIcons";
+            mnView_SmallIcons.Size = new Size(267, 44);
+            mnView_SmallIcons.Text = "Small Icons";
+            mnView_SmallIcons.Click += mnView_SmallIcons_Click;
+            // 
+            // formatToolStripMenuItem
+            // 
+            formatToolStripMenuItem.Name = "formatToolStripMenuItem";
+            formatToolStripMenuItem.Size = new Size(109, 38);
+            formatToolStripMenuItem.Text = "Format";
+            formatToolStripMenuItem.Click += formatToolStripMenuItem_Click;
             // 
             // ProductForm
             // 
@@ -220,12 +285,18 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(lblTitle);
+            Controls.Add(menu);
+            MainMenuStrip = menu;
             Name = "ProductForm";
             Text = "ProductForm";
+            Load += ProductForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
+            menu.ResumeLayout(false);
+            menu.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -247,5 +318,12 @@
         private Button btnEdit;
         private Button btnAdd;
         private Button button4;
+        private MenuStrip menu;
+        private ToolStripMenuItem mnView;
+        private ToolStripMenuItem mnView_List;
+        private ToolStripMenuItem mnView_Details;
+        private ToolStripMenuItem formatToolStripMenuItem;
+        private ToolStripMenuItem mnView_SmallIcons;
+        private ImageList imglist;
     }
 }

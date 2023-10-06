@@ -17,10 +17,11 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             string[] dataRow = { txtName.Text, txtDesc.Text, txtPrice.Text };
             ListViewItem item = new ListViewItem(dataRow);
+            item.ImageIndex = 0;
             lvProductList.Items.Add(item);
 
             txtPrice.Clear();
@@ -61,6 +62,45 @@ namespace WinFormsApp1
 
 
 
+        }
+
+        private void mnView_List_Click(object sender, EventArgs e)
+        {
+            lvProductList.View = View.List;
+        }
+
+        private void mnView_Details_Click(object sender, EventArgs e)
+        {
+            lvProductList.View = View.Details;
+        }
+
+        private void mnView_SmallIcons_Click(object sender, EventArgs e)
+        {
+            lvProductList.View = View.SmallIcon;
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductForm_Load(object sender, EventArgs e)
+        {
+            lvProductList.Items.Add(new ListViewItem(new string[] { "Tiger", "", "2000" }));
+            lvProductList.Items.Add(new ListViewItem(new string[] { "Heineken", "", "15000" }));
+
+
+            lvProductList.Items[0].ImageIndex = 0;
+
+
+        }
+
+        private void formatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.ShowDialog();
+
+            lvProductList.ForeColor = dlg.Color;
         }
     }
 }
