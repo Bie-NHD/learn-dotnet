@@ -30,21 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.personal_financeDataSet = new DBControl_.NET_Framework_.personal_financeDataSet();
             this.personalfinanceDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.personal_financeDataSet = new DBControl_.NET_Framework_.personal_financeDataSet();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnViewAll = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personal_financeDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalfinanceDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personal_financeDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer
@@ -59,57 +59,14 @@
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.button4);
-            this.splitContainer.Panel2.Controls.Add(this.button3);
-            this.splitContainer.Panel2.Controls.Add(this.button2);
+            this.splitContainer.Panel2.Controls.Add(this.btnDelete);
+            this.splitContainer.Panel2.Controls.Add(this.btnAdd);
+            this.splitContainer.Panel2.Controls.Add(this.btnViewAll);
             this.splitContainer.Panel2.Controls.Add(this.button1);
             this.splitContainer.Panel2.Controls.Add(this.textBox1);
             this.splitContainer.Size = new System.Drawing.Size(1316, 773);
             this.splitContainer.SplitterDistance = 800;
             this.splitContainer.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(38, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 31);
-            this.textBox1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(172, 52);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 34);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(127, 148);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(157, 244);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(156, 396);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -124,15 +81,58 @@
             this.dataGridView1.Size = new System.Drawing.Size(800, 773);
             this.dataGridView1.TabIndex = 0;
             // 
+            // personalfinanceDataSetBindingSource
+            // 
+            this.personalfinanceDataSetBindingSource.DataSource = this.personal_financeDataSet;
+            this.personalfinanceDataSetBindingSource.Position = 0;
+            // 
             // personal_financeDataSet
             // 
             this.personal_financeDataSet.DataSetName = "personal_financeDataSet";
             this.personal_financeDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // personalfinanceDataSetBindingSource
+            // btnDelete
             // 
-            this.personalfinanceDataSetBindingSource.DataSource = this.personal_financeDataSet;
-            this.personalfinanceDataSetBindingSource.Position = 0;
+            this.btnDelete.Location = new System.Drawing.Point(126, 281);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(290, 39);
+            this.btnDelete.TabIndex = 4;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(127, 210);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(289, 44);
+            this.btnAdd.TabIndex = 3;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            // 
+            // btnViewAll
+            // 
+            this.btnViewAll.Location = new System.Drawing.Point(127, 148);
+            this.btnViewAll.Name = "btnViewAll";
+            this.btnViewAll.Size = new System.Drawing.Size(289, 41);
+            this.btnViewAll.TabIndex = 2;
+            this.btnViewAll.Text = "View All";
+            this.btnViewAll.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(328, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(144, 34);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Search";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(36, 34);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(266, 31);
+            this.textBox1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -149,8 +149,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personal_financeDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalfinanceDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.personal_financeDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -158,9 +158,9 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnViewAll;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
