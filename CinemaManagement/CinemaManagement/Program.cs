@@ -2,6 +2,7 @@ namespace CinemaManagement
 {
     internal static class Program
     {
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -13,5 +14,7 @@ namespace CinemaManagement
             ApplicationConfiguration.Initialize();
             Application.Run(new MovieForm());
         }
+
+        
     }
 }

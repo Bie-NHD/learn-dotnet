@@ -54,39 +54,43 @@
             txtMovieName = new TextBox();
             txtMovieOrigin = new TextBox();
             txtRestrictAge = new TextBox();
-            textBox5 = new TextBox();
+            txtAdditionalFee = new TextBox();
             grbMovieCategory = new GroupBox();
             rad_Actions = new RadioButton();
             rad_Romance = new RadioButton();
             grbMovieFormat = new GroupBox();
             rad_3D = new RadioButton();
             rad_2D = new RadioButton();
-            dateTimePicker1 = new DateTimePicker();
+            dtpAiringDate = new DateTimePicker();
             lblAdditionalFee = new Label();
             txtOrderId = new TextBox();
             grbMovieDetails = new GroupBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             grbMovieList = new GroupBox();
+            errorProvider1 = new ErrorProvider(components);
             grbActions.SuspendLayout();
             tblpMovieDetails.SuspendLayout();
             grbMovieCategory.SuspendLayout();
             grbMovieFormat.SuspendLayout();
             grbMovieDetails.SuspendLayout();
             grbMovieList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // lvMovieList
             // 
             lvMovieList.Columns.AddRange(new ColumnHeader[] { OrderID, MovieName, MovieCategory, AiringDate });
             lvMovieList.Dock = DockStyle.Fill;
+            lvMovieList.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             lvMovieList.FullRowSelect = true;
             lvMovieList.Location = new Point(3, 19);
             lvMovieList.Margin = new Padding(2, 1, 2, 1);
             lvMovieList.Name = "lvMovieList";
-            lvMovieList.Size = new Size(394, 324);
+            lvMovieList.Size = new Size(486, 308);
             lvMovieList.TabIndex = 0;
             lvMovieList.UseCompatibleStateImageBehavior = false;
             lvMovieList.View = View.Details;
+            lvMovieList.ItemSelectionChanged += lvMovieList_ItemSelectionChanged;
             // 
             // OrderID
             // 
@@ -122,22 +126,25 @@
             // 
             // lblOrderID
             // 
-            lblOrderID.AutoSize = true;
-            lblOrderID.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOrderID.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lblOrderID.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             lblOrderID.Location = new Point(3, 0);
             lblOrderID.Name = "lblOrderID";
-            lblOrderID.Size = new Size(50, 15);
+            lblOrderID.Size = new Size(118, 29);
             lblOrderID.TabIndex = 0;
             lblOrderID.Text = "Mã đơn";
+            lblOrderID.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblMovieName
             // 
+            lblMovieName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblMovieName.AutoSize = true;
             lblMovieName.Location = new Point(3, 29);
             lblMovieName.Name = "lblMovieName";
-            lblMovieName.Size = new Size(58, 15);
+            lblMovieName.Size = new Size(118, 29);
             lblMovieName.TabIndex = 1;
             lblMovieName.Text = "Tên phim";
+            lblMovieName.TextAlign = ContentAlignment.MiddleRight;
             // 
             // contextMenuStrip1
             // 
@@ -146,6 +153,7 @@
             // 
             // grbActions
             // 
+            grbActions.BackColor = SystemColors.Control;
             grbActions.Controls.Add(btnStats);
             grbActions.Controls.Add(btnSort);
             grbActions.Controls.Add(btnEdit);
@@ -154,13 +162,13 @@
             grbActions.Controls.Add(btnAdd);
             grbActions.Dock = DockStyle.Bottom;
             grbActions.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            grbActions.Location = new Point(0, 371);
+            grbActions.ForeColor = SystemColors.ControlText;
+            grbActions.Location = new Point(0, 355);
             grbActions.Name = "grbActions";
             grbActions.Size = new Size(824, 74);
             grbActions.TabIndex = 2;
             grbActions.TabStop = false;
             grbActions.Text = "Tác vụ";
-            grbActions.Enter += grbActions_Enter;
             // 
             // btnStats
             // 
@@ -217,6 +225,7 @@
             btnAdd.TabIndex = 0;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // tblpMovieDetails
             // 
@@ -233,14 +242,16 @@
             tblpMovieDetails.Controls.Add(txtMovieName, 1, 1);
             tblpMovieDetails.Controls.Add(txtMovieOrigin, 1, 2);
             tblpMovieDetails.Controls.Add(txtRestrictAge, 1, 5);
-            tblpMovieDetails.Controls.Add(textBox5, 1, 7);
+            tblpMovieDetails.Controls.Add(txtAdditionalFee, 1, 7);
             tblpMovieDetails.Controls.Add(grbMovieCategory, 1, 3);
             tblpMovieDetails.Controls.Add(grbMovieFormat, 1, 6);
-            tblpMovieDetails.Controls.Add(dateTimePicker1, 1, 4);
+            tblpMovieDetails.Controls.Add(dtpAiringDate, 1, 4);
             tblpMovieDetails.Controls.Add(lblAdditionalFee, 0, 7);
             tblpMovieDetails.Controls.Add(txtOrderId, 1, 0);
             tblpMovieDetails.Controls.Add(lblOrderID, 0, 0);
             tblpMovieDetails.Dock = DockStyle.Fill;
+            tblpMovieDetails.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tblpMovieDetails.ForeColor = SystemColors.ControlText;
             tblpMovieDetails.Location = new Point(2, 17);
             tblpMovieDetails.Name = "tblpMovieDetails";
             tblpMovieDetails.RowCount = 8;
@@ -253,54 +264,63 @@
             tblpMovieDetails.RowStyles.Add(new RowStyle());
             tblpMovieDetails.RowStyles.Add(new RowStyle());
             tblpMovieDetails.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tblpMovieDetails.Size = new Size(420, 328);
+            tblpMovieDetails.Size = new Size(328, 312);
             tblpMovieDetails.TabIndex = 2;
-            tblpMovieDetails.Paint += tableLayoutPanel1_Paint;
             // 
             // lblMovieOrigin
             // 
+            lblMovieOrigin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblMovieOrigin.AutoSize = true;
             lblMovieOrigin.Location = new Point(3, 58);
             lblMovieOrigin.Name = "lblMovieOrigin";
-            lblMovieOrigin.Size = new Size(55, 15);
+            lblMovieOrigin.Size = new Size(118, 29);
             lblMovieOrigin.TabIndex = 2;
             lblMovieOrigin.Text = "Quốc gia";
+            lblMovieOrigin.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblMovieCategory
             // 
+            lblMovieCategory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblMovieCategory.AutoSize = true;
             lblMovieCategory.Location = new Point(3, 87);
             lblMovieCategory.Name = "lblMovieCategory";
-            lblMovieCategory.Size = new Size(50, 15);
+            lblMovieCategory.Size = new Size(118, 69);
             lblMovieCategory.TabIndex = 3;
             lblMovieCategory.Text = "Thể loại";
+            lblMovieCategory.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblMovieAiringDate
             // 
+            lblMovieAiringDate.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblMovieAiringDate.AutoSize = true;
             lblMovieAiringDate.Location = new Point(3, 156);
             lblMovieAiringDate.Name = "lblMovieAiringDate";
-            lblMovieAiringDate.Size = new Size(98, 15);
+            lblMovieAiringDate.Size = new Size(118, 29);
             lblMovieAiringDate.TabIndex = 4;
             lblMovieAiringDate.Text = "Ngày công chiếu";
+            lblMovieAiringDate.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblMovieRestrictAge
             // 
+            lblMovieRestrictAge.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblMovieRestrictAge.AutoSize = true;
             lblMovieRestrictAge.Location = new Point(3, 185);
             lblMovieRestrictAge.Name = "lblMovieRestrictAge";
-            lblMovieRestrictAge.Size = new Size(99, 15);
+            lblMovieRestrictAge.Size = new Size(118, 29);
             lblMovieRestrictAge.TabIndex = 5;
             lblMovieRestrictAge.Text = "Độ tuổi quy định";
+            lblMovieRestrictAge.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblMovieFormat
             // 
+            lblMovieFormat.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblMovieFormat.AutoSize = true;
             lblMovieFormat.Location = new Point(3, 214);
             lblMovieFormat.Name = "lblMovieFormat";
-            lblMovieFormat.Size = new Size(63, 15);
+            lblMovieFormat.Size = new Size(118, 69);
             lblMovieFormat.TabIndex = 6;
             lblMovieFormat.Text = "Định dạng";
+            lblMovieFormat.TextAlign = ContentAlignment.MiddleRight;
             // 
             // txtMovieName
             // 
@@ -325,14 +345,15 @@
             txtRestrictAge.Name = "txtRestrictAge";
             txtRestrictAge.Size = new Size(290, 23);
             txtRestrictAge.TabIndex = 11;
+            txtRestrictAge.Validating += txtRestrictAge_Validating;
             // 
-            // textBox5
+            // txtAdditionalFee
             // 
-            textBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox5.Location = new Point(127, 286);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(290, 23);
-            textBox5.TabIndex = 12;
+            txtAdditionalFee.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtAdditionalFee.Location = new Point(127, 286);
+            txtAdditionalFee.Name = "txtAdditionalFee";
+            txtAdditionalFee.Size = new Size(290, 23);
+            txtAdditionalFee.TabIndex = 12;
             // 
             // grbMovieCategory
             // 
@@ -349,7 +370,7 @@
             rad_Actions.AutoSize = true;
             rad_Actions.Location = new Point(96, 22);
             rad_Actions.Name = "rad_Actions";
-            rad_Actions.Size = new Size(86, 19);
+            rad_Actions.Size = new Size(85, 19);
             rad_Actions.TabIndex = 1;
             rad_Actions.TabStop = true;
             rad_Actions.Text = "Hành động";
@@ -360,7 +381,7 @@
             rad_Romance.AutoSize = true;
             rad_Romance.Location = new Point(6, 22);
             rad_Romance.Name = "rad_Romance";
-            rad_Romance.Size = new Size(75, 19);
+            rad_Romance.Size = new Size(74, 19);
             rad_Romance.TabIndex = 0;
             rad_Romance.TabStop = true;
             rad_Romance.Text = "Tình cảm";
@@ -382,7 +403,7 @@
             rad_3D.AutoSize = true;
             rad_3D.Location = new Point(79, 22);
             rad_3D.Name = "rad_3D";
-            rad_3D.Size = new Size(41, 19);
+            rad_3D.Size = new Size(39, 19);
             rad_3D.TabIndex = 1;
             rad_3D.TabStop = true;
             rad_3D.Text = "3D";
@@ -393,27 +414,30 @@
             rad_2D.AutoSize = true;
             rad_2D.Location = new Point(6, 22);
             rad_2D.Name = "rad_2D";
-            rad_2D.Size = new Size(41, 19);
+            rad_2D.Size = new Size(39, 19);
             rad_2D.TabIndex = 0;
             rad_2D.TabStop = true;
             rad_2D.Text = "2D";
             rad_2D.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker1
+            // dtpAiringDate
             // 
-            dateTimePicker1.Location = new Point(127, 159);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 17;
+            dtpAiringDate.CustomFormat = "dd MM yyyy hh:mm:ss";
+            dtpAiringDate.Location = new Point(127, 159);
+            dtpAiringDate.Name = "dtpAiringDate";
+            dtpAiringDate.Size = new Size(200, 23);
+            dtpAiringDate.TabIndex = 17;
             // 
             // lblAdditionalFee
             // 
+            lblAdditionalFee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblAdditionalFee.AutoSize = true;
             lblAdditionalFee.Location = new Point(3, 283);
             lblAdditionalFee.Name = "lblAdditionalFee";
-            lblAdditionalFee.Size = new Size(118, 15);
+            lblAdditionalFee.Size = new Size(118, 29);
             lblAdditionalFee.TabIndex = 7;
             lblAdditionalFee.Text = "Phụ thu phí đặc biệt";
+            lblAdditionalFee.TextAlign = ContentAlignment.MiddleRight;
             // 
             // txtOrderId
             // 
@@ -428,11 +452,12 @@
             grbMovieDetails.Controls.Add(tblpMovieDetails);
             grbMovieDetails.Dock = DockStyle.Left;
             grbMovieDetails.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            grbMovieDetails.ForeColor = SystemColors.ControlText;
             grbMovieDetails.Location = new Point(0, 25);
             grbMovieDetails.Margin = new Padding(2, 1, 2, 1);
             grbMovieDetails.Name = "grbMovieDetails";
             grbMovieDetails.Padding = new Padding(2, 1, 2, 1);
-            grbMovieDetails.Size = new Size(424, 346);
+            grbMovieDetails.Size = new Size(332, 330);
             grbMovieDetails.TabIndex = 1;
             grbMovieDetails.TabStop = false;
             grbMovieDetails.Text = "Thông tin phim";
@@ -441,19 +466,24 @@
             // 
             grbMovieList.Controls.Add(lvMovieList);
             grbMovieList.Dock = DockStyle.Fill;
-            grbMovieList.Location = new Point(424, 25);
+            grbMovieList.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            grbMovieList.Location = new Point(332, 25);
             grbMovieList.Name = "grbMovieList";
-            grbMovieList.Size = new Size(400, 346);
+            grbMovieList.Size = new Size(492, 330);
             grbMovieList.TabIndex = 4;
             grbMovieList.TabStop = false;
             grbMovieList.Text = "Danh sách phim";
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
             // 
             // MovieForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(824, 445);
+            ClientSize = new Size(824, 429);
             Controls.Add(grbMovieList);
             Controls.Add(grbMovieDetails);
             Controls.Add(lblTitle);
@@ -472,6 +502,7 @@
             grbMovieDetails.ResumeLayout(false);
             grbMovieDetails.PerformLayout();
             grbMovieList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -499,14 +530,14 @@
         private TextBox txtMovieName;
         private TextBox txtMovieOrigin;
         private TextBox txtRestrictAge;
-        private TextBox textBox5;
+        private TextBox txtAdditionalFee;
         private GroupBox grbMovieCategory;
         private RadioButton rad_Romance;
         private RadioButton rad_Actions;
         private GroupBox grbMovieFormat;
         private RadioButton rad_3D;
         private RadioButton rad_2D;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpAiringDate;
         private Button btnStats;
         private Button btnSort;
         private Button btnEdit;
@@ -515,5 +546,6 @@
         private Button btnAdd;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private GroupBox grbMovieList;
+        private ErrorProvider errorProvider1;
     }
 }
