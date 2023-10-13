@@ -117,6 +117,7 @@
             this.btnViewAll.TabIndex = 2;
             this.btnViewAll.Text = "View All";
             this.btnViewAll.UseVisualStyleBackColor = true;
+            this.btnViewAll.Click += new System.EventHandler(this.btnViewAll_Click);
             // 
             // button1
             // 

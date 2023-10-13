@@ -28,9 +28,23 @@ namespace DBControl
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            SqlConnec
+            BusinessLogic.Instance.Search(dataGridView: dgv, ProductName: txtKeyword.Text);
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            BusinessLogic.Instance.View(dataGridView: dgv);
+
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            if (BusinessLogic.Instance.Insert(dataGridView: dgv))
+            {
+                MessageBox.Show("Thêm thành công");
+            }
         }
     }
 }

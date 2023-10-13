@@ -30,11 +30,11 @@
         {
             splitContainer1 = new SplitContainer();
             dgv = new DataGridView();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
-            textBox1 = new TextBox();
+            btnDelete = new Button();
+            btnInsert = new Button();
+            btnView = new Button();
+            btnSearch = new Button();
+            txtKeyword = new TextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -54,13 +54,13 @@
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(button4);
-            splitContainer1.Panel2.Controls.Add(button3);
-            splitContainer1.Panel2.Controls.Add(button2);
-            splitContainer1.Panel2.Controls.Add(button1);
-            splitContainer1.Panel2.Controls.Add(textBox1);
+            splitContainer1.Panel2.Controls.Add(btnDelete);
+            splitContainer1.Panel2.Controls.Add(btnInsert);
+            splitContainer1.Panel2.Controls.Add(btnView);
+            splitContainer1.Panel2.Controls.Add(btnSearch);
+            splitContainer1.Panel2.Controls.Add(txtKeyword);
             splitContainer1.Size = new Size(1223, 641);
-            splitContainer1.SplitterDistance = 407;
+            splitContainer1.SplitterDistance = 700;
             splitContainer1.TabIndex = 0;
             // 
             // dgv
@@ -71,52 +71,54 @@
             dgv.Name = "dgv";
             dgv.RowHeadersWidth = 82;
             dgv.RowTemplate.Height = 41;
-            dgv.Size = new Size(407, 641);
+            dgv.Size = new Size(700, 641);
             dgv.TabIndex = 0;
             // 
-            // button4
+            // btnDelete
             // 
-            button4.Location = new Point(262, 281);
-            button4.Name = "button4";
-            button4.Size = new Size(150, 46);
-            button4.TabIndex = 4;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            btnDelete.Location = new Point(39, 233);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(456, 46);
+            btnDelete.TabIndex = 4;
+            btnDelete.Text = "Xóa";
+            btnDelete.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnInsert
             // 
-            button3.Location = new Point(220, 193);
-            button3.Name = "button3";
-            button3.Size = new Size(150, 46);
-            button3.TabIndex = 3;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btnInsert.Location = new Point(39, 168);
+            btnInsert.Name = "btnInsert";
+            btnInsert.Size = new Size(456, 46);
+            btnInsert.TabIndex = 3;
+            btnInsert.Text = "Thêm";
+            btnInsert.UseVisualStyleBackColor = true;
+            btnInsert.Click += btnInsert_Click;
             // 
-            // button2
+            // btnView
             // 
-            button2.Location = new Point(170, 127);
-            button2.Name = "button2";
-            button2.Size = new Size(150, 46);
-            button2.TabIndex = 2;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnView.Location = new Point(39, 106);
+            btnView.Name = "btnView";
+            btnView.Size = new Size(456, 46);
+            btnView.TabIndex = 2;
+            btnView.Text = "Xem";
+            btnView.UseVisualStyleBackColor = true;
+            btnView.Click += btnView_Click;
             // 
-            // button1
+            // btnSearch
             // 
-            button1.Location = new Point(401, 37);
-            button1.Name = "button1";
-            button1.Size = new Size(150, 46);
-            button1.TabIndex = 1;
-            button1.Text = "btnXem";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnSearch.Location = new Point(345, 37);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(150, 46);
+            btnSearch.TabIndex = 1;
+            btnSearch.Text = "Tìm";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
-            // textBox1
+            // txtKeyword
             // 
-            textBox1.Location = new Point(109, 44);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(200, 39);
-            textBox1.TabIndex = 0;
+            txtKeyword.Location = new Point(39, 44);
+            txtKeyword.Name = "txtKeyword";
+            txtKeyword.Size = new Size(281, 39);
+            txtKeyword.TabIndex = 0;
             // 
             // Form1
             // 
@@ -141,10 +143,10 @@
 
         private SplitContainer splitContainer1;
         private DataGridView dgv;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private Button button1;
-        private TextBox textBox1;
+        private Button btnDelete;
+        private Button btnInsert;
+        private Button btnView;
+        private Button btnSearch;
+        private TextBox txtKeyword;
     }
 }

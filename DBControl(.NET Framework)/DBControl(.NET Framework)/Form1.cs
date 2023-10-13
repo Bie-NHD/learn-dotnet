@@ -64,5 +64,10 @@ namespace DBControl_.NET_Framework_
 
             return dataTable;
         }
+
+        private void btnViewAll_Click(object sender, EventArgs e)
+        {
+           
+        }
     }
 }
