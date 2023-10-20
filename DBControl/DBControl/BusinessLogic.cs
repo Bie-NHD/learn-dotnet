@@ -23,6 +23,7 @@ namespace DBControl
         public void View(DataGridView dataGridView)
         {
             dataGridView.DataSource = DataAccessObject.Instance.View();
+            dataGridView.Columns[0].ReadOnly = true;
         }
         public void Search(DataGridView dataGridView,string ProductName)
         {
@@ -33,11 +34,30 @@ namespace DBControl
             DataGridViewRow row = dataGridView.Rows[dataGridView.CurrentRow.Index];
             ProductModel product = new ProductModel()
             {
-                ProductName = row.Cells["ProductName"].Value.ToString(),
-                ProductPrice = Convert.ToInt32(row.Cells["ProductPrice"].Value.ToString),
+                ProductName = row.Cells["ProductName"].Value.ToString()??"N/A",
+                ProductPrice = Convert.ToInt32(row.Cells["ProductPrice"].Value),
             };
             return DataAccessObject.Instance.Insert(product);
         }
-        public void Delete() { }
+        public bool Delete(DataGridView dgv) 
+        { 
+            string ProductId = dgv.Rows[dgv.CurrentRow.Index].Cells[0].Value.ToString();
+
+            return DataAccessObject.Instance.Delete(ProductId);
+        
+        }
+        public bool Update(DataGridView dgv)
+        {
+            DataGridViewRow row = dgv.Rows[dgv.CurrentRow.Index];
+
+            ProductModel product = new ProductModel()
+            {
+                ProductID = row.Cells[0].Value.ToString(),
+                ProductName = row.Cells["ProductName"].Value.ToString(),
+                ProductPrice = Convert.ToInt32(row.Cells["ProductPrice"].Value),
+            };
+
+            return DataAccessObject.Instance.Update(product);
+        }
     }
 }

@@ -41,5 +41,22 @@ namespace DBControl
 
             return DataProvider.Instance.execNonSql(query) > 0;
         }
+
+        public bool Update (ProductModel product)
+        {
+            string query = "UPDATE Product SET ProductName = @PRODUCTNAME, ProductPrice = @PRODUCTPRICE, WHERE ProductId = @PRODUCTID;";
+
+            object[] prms = new object[] { product.ProductName, product.ProductPrice, product.ProductID };
+
+            return DataProvider.Instance.execNonSql (query, prms)>0;
+        }
+
+        public bool Delete (string productID)
+        {
+            string query = "DELETE Product WHERE ProductID = @PRODUCTID";
+            object[] prms = new object[] { productID };
+
+            return DataProvider.Instance.execNonSql(query, prms)>0;
+        }
     }
 }

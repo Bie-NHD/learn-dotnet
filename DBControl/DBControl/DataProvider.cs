@@ -7,7 +7,8 @@ namespace DBControl
     {
         const string CONNECTION_STRING = @"Data Source=localhost;Initial Catalog=quanlykhohang;Integrated Security=True;";
         private static DataProvider instance;
-       internal static DataProvider Instance {
+        internal static DataProvider Instance
+        {
             get
             {
                 if (instance == null) instance = new DataProvider();
@@ -15,64 +16,61 @@ namespace DBControl
             }
         }
 
-        public DataTable execSql (string sql, params object[] args)
+        public DataTable execSql(string sql, params Object[] args)
         {
-            DataTable dt = new DataTable();
-
-            using (SqlConnection connection = new SqlConnection
-                (CONNECTION_STRING))
+            DataTable dat = new DataTable();
+            using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
             {
                 connection.Open();
-
-                SqlCommand sqlCommand = new SqlCommand(sql, connection);
-
+                SqlCommand command = new SqlCommand(sql, connection);
                 if (args.Length > 0)
                 {
                     string[] processSql = sql.Split(' ');
                     List<string> paramList = new List<string>();
                     foreach (string s in processSql)
-                    {
-
-                    }
+                        if (s.StartsWith("@"))
+                        {
+                            if (s.EndsWith(","))
+                                paramList.Add(s.Remove(s.Length - 1));
+                            else
+                                paramList.Add(s);
+                        }
+                    for (int i = 0; i < args.Length; i++)
+                        command.Parameters.AddWithValue(paramList[i], args[i]);
                 }
-
-                
-
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dat);
                 connection.Close();
             }
-
-            return dt;
+            return dat;
         }
 
         // INSERT, UPDATE, DELETE ...
-         public int  execNonSql (string sql, params object[] args)
+        public int execNonSql(string sql, params Object[] args)
         {
-           
-            int affectedRows;
-
-            using (SqlConnection connection = new SqlConnection
-                (CONNECTION_STRING))
+            int effectedRows;
+            using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
             {
-                connection.Open ();
-
-                SqlCommand sqlCommand = new SqlCommand(sql, connection);
-
+                connection.Open();
+                SqlCommand command = new SqlCommand(sql, connection);
                 if (args.Length > 0)
                 {
                     string[] processSql = sql.Split(' ');
                     List<string> paramList = new List<string>();
                     foreach (string s in processSql)
-                    {
-
-                    }
+                        if (s.StartsWith("@"))
+                        {
+                            if (s.EndsWith(","))
+                                s.Remove(s.Length - 1);
+                            paramList.Add(s);
+                        }
+                    for (int i = 0; i < args.Length; i++)
+                        command.Parameters.AddWithValue(paramList[i], args[i]);
                 }
-
-                affectedRows = sqlCommand.ExecuteNonQuery ();
-
-                connection.Close ();
+                effectedRows = command.ExecuteNonQuery();
+                connection.Close();
             }
-
-            return affectedRows;
+            return effectedRows;
         }
     }
 }

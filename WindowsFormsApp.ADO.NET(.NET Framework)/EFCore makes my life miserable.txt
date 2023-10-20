@@ -1,0 +1,4 @@
+Scaffold-DbContext "USER ID=DESKTOP-JCH6JM7\bie_N;Data Source=localhost;Initial Catalog=bookstore;Integrated Security=True;Trusted_Connection=True;" Microsoft.EntityFrameWorkCore.SqlServer -outputdir Repository/Models -context MoDbContext -contextdir Repository -DataAnnotations -Force
+
+
+Scaffold-DbContext "Server=localhost;Integrated Security=True;Trusted_Connection=True;Database=bookstore;TrustServerCertificate=True;Encrypt=False;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models

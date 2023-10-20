@@ -5,9 +5,13 @@ namespace DBControl
     public partial class Form1 : Form
     {
         SqlConnection connection = new SqlConnection();
+
+
         public Form1()
         {
             InitializeComponent();
+
+            
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -35,8 +39,8 @@ namespace DBControl
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            BusinessLogic.Instance.View(dataGridView: dgv);
 
+            ViewAll();
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
@@ -45,6 +49,11 @@ namespace DBControl
             {
                 MessageBox.Show("Thêm thành công");
             }
+        }
+
+        private void ViewAll()
+        {
+            BusinessLogic.Instance.View(dataGridView: dgv);
         }
     }
 }
