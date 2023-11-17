@@ -35,6 +35,7 @@
             btnView = new Button();
             btnSearch = new Button();
             txtKeyword = new TextBox();
+            btn_export_excel = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -54,6 +55,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(btn_export_excel);
             splitContainer1.Panel2.Controls.Add(btnDelete);
             splitContainer1.Panel2.Controls.Add(btnInsert);
             splitContainer1.Panel2.Controls.Add(btnView);
@@ -120,6 +122,16 @@
             txtKeyword.Size = new Size(281, 39);
             txtKeyword.TabIndex = 0;
             // 
+            // btn_export_excel
+            // 
+            btn_export_excel.Location = new Point(53, 495);
+            btn_export_excel.Name = "btn_export_excel";
+            btn_export_excel.Size = new Size(150, 46);
+            btn_export_excel.TabIndex = 5;
+            btn_export_excel.Text = "Export Excel";
+            btn_export_excel.UseVisualStyleBackColor = true;
+            btn_export_excel.Click += btn_export_excel_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -148,5 +160,6 @@
         private Button btnView;
         private Button btnSearch;
         private TextBox txtKeyword;
+        private Button btn_export_excel;
     }
 }

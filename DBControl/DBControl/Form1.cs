@@ -11,7 +11,7 @@ namespace DBControl
         {
             InitializeComponent();
 
-            
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -40,7 +40,11 @@ namespace DBControl
         private void btnView_Click(object sender, EventArgs e)
         {
 
-            ViewAll();
+            //ViewAll();
+            using (UQuanlybanhangContext db = new UQuanlybanhangContext())
+            {
+                dgv.DataSource = db.Products.Select(p=>p).ToList();
+            }
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
@@ -54,6 +58,11 @@ namespace DBControl
         private void ViewAll()
         {
             BusinessLogic.Instance.View(dataGridView: dgv);
+        }
+
+        private void btn_export_excel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
