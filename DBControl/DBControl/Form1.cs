@@ -43,7 +43,7 @@ namespace DBControl
             //ViewAll();
             using (UQuanlybanhangContext db = new UQuanlybanhangContext())
             {
-                dgv.DataSource = db.Products.Select(p=>p).ToList();
+                dgv.DataSource = db.Products.Select(p => p).ToList();
             }
         }
 
@@ -63,6 +63,28 @@ namespace DBControl
         private void btn_export_excel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            using (UQuanlybanhangContext db = new UQuanlybanhangContext())
+            {
+                //var data = db.Products.Select(p=> new )
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int code = Convert.ToInt32(dgv.SelectedCells[0].OwningRow.Cells["ProductCode"].Value);
+
+            using (UQuanlybanhangContext db = new UQuanlybanhangContext())
+            {
+                var selectedProduct = db.Products.Where(p => p.ProductCode == code).FirstOrDefault();
+                db.Products.Remove(selectedProduct!);
+                db.SaveChanges();
+            }
+
+            btnView_Click(sender, e);
         }
     }
 }

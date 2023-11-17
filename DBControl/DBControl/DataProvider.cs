@@ -15,6 +15,7 @@ namespace DBControl
                 return instance;
             }
         }
+        public static SqlConnection GetSqlConnection() => new SqlConnection(CONNECTION_STRING);
 
         public DataTable execSql(string sql, params Object[] args)
         {

@@ -13,7 +13,7 @@ namespace DBControl_.NET_Framework_
 {
     public partial class Form1 : Form
     {
-        const string CONNSTR = @"Data Source=localhost;Initial Catalog=personal_finance;Integrated Security=True";
+        const string CONNSTR = @"Data Source=localhost;Initial Catalog=localhost;Integrated Security=True";
         public Form1()
         {
             InitializeComponent();
@@ -68,6 +68,16 @@ namespace DBControl_.NET_Framework_
         private void btnViewAll_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

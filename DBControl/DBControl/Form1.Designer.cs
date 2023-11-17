@@ -30,12 +30,13 @@
         {
             splitContainer1 = new SplitContainer();
             dgv = new DataGridView();
+            btn_print = new Button();
+            btn_export_excel = new Button();
             btnDelete = new Button();
             btnInsert = new Button();
             btnView = new Button();
             btnSearch = new Button();
             txtKeyword = new TextBox();
-            btn_export_excel = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -55,6 +56,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(btn_print);
             splitContainer1.Panel2.Controls.Add(btn_export_excel);
             splitContainer1.Panel2.Controls.Add(btnDelete);
             splitContainer1.Panel2.Controls.Add(btnInsert);
@@ -76,6 +78,26 @@
             dgv.Size = new Size(700, 641);
             dgv.TabIndex = 0;
             // 
+            // btn_print
+            // 
+            btn_print.Location = new Point(225, 495);
+            btn_print.Name = "btn_print";
+            btn_print.Size = new Size(150, 46);
+            btn_print.TabIndex = 6;
+            btn_print.Text = "Print Report";
+            btn_print.UseVisualStyleBackColor = true;
+            btn_print.Click += btn_print_Click;
+            // 
+            // btn_export_excel
+            // 
+            btn_export_excel.Location = new Point(53, 495);
+            btn_export_excel.Name = "btn_export_excel";
+            btn_export_excel.Size = new Size(150, 46);
+            btn_export_excel.TabIndex = 5;
+            btn_export_excel.Text = "Export Excel";
+            btn_export_excel.UseVisualStyleBackColor = true;
+            btn_export_excel.Click += btn_export_excel_Click;
+            // 
             // btnDelete
             // 
             btnDelete.Location = new Point(39, 233);
@@ -84,6 +106,7 @@
             btnDelete.TabIndex = 4;
             btnDelete.Text = "Xóa";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnInsert
             // 
@@ -122,16 +145,6 @@
             txtKeyword.Size = new Size(281, 39);
             txtKeyword.TabIndex = 0;
             // 
-            // btn_export_excel
-            // 
-            btn_export_excel.Location = new Point(53, 495);
-            btn_export_excel.Name = "btn_export_excel";
-            btn_export_excel.Size = new Size(150, 46);
-            btn_export_excel.TabIndex = 5;
-            btn_export_excel.Text = "Export Excel";
-            btn_export_excel.UseVisualStyleBackColor = true;
-            btn_export_excel.Click += btn_export_excel_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -161,5 +174,6 @@
         private Button btnSearch;
         private TextBox txtKeyword;
         private Button btn_export_excel;
+        private Button btn_print;
     }
 }
