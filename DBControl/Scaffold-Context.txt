@@ -1,0 +1,4 @@
+Scaffold-DbContext "Data Source=localhost;Initial Catalog=u_quanlybanhang;Integrated Security=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+https://www.thecodebuzz.com/entity-framework-windows-form-desktop-application/#Config-EF-windows-form
+https://www.thecodebuzz.com/efcore-scaffold-dbcontext-commands-orm-net-core/

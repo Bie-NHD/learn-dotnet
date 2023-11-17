@@ -5,7 +5,7 @@ namespace DBControl
 {
     internal class DataProvider
     {
-        const string CONNECTION_STRING = @"Data Source=localhost;Initial Catalog=quanlykhohang;Integrated Security=True;";
+        const string CONNECTION_STRING = @"Data Source=localhost;Initial Catalog=u_quanlybanhang;Integrated Security=True;";
         private static DataProvider instance;
         internal static DataProvider Instance
         {
